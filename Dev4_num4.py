@@ -29,9 +29,16 @@ for index, value in enumerate(halves):
         continue
     else:
         N2 = N(R(halves[index-1]), Ns[index-1], R(halves[index]))
-        Ns.append(N2)
-        M = int(cores[index][3::])
-        mass = N2*M/sp.N_A
-        masses.append(mass)
-        print(f'{cores[index]} : m = {mass:.3E}, N = {N2:.3E}, R = {R(halves[index]):.3E}')
+        if N2 < 1:
+            M = int(cores[index][3::])
+            mass = N2 * M / sp.N_A
+            masses.append(mass)
+            Ns.append(N2)
+            print(f'{cores[index]} : m = {mass:.3E}, N = {0}        , R = {R(halves[index]):.3E}')
+        else:
+            Ns.append(N2)
+            M = int(cores[index][3::])
+            mass = N2*M/sp.N_A
+            masses.append(mass)
+            print(f'{cores[index]} : m = {mass:.3E}, N = {Ns[index]:.3E}, R = {R(halves[index]):.3E}')
 
